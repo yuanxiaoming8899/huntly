@@ -1,164 +1,186 @@
-# Huntly
-
-**中文** | [English](./README.en.md)
-
-## 目录
-
-- [Huntly](#huntly)
-  - [目录](#目录)
-  - [系统截图](#系统截图)
-  - [运行前提](#运行前提)
-  - [使用](#使用)
-    - [运行服务端](#运行服务端)
-      - [使用服务端安装包](#使用服务端安装包)
-      - [使用 docker 运行](#使用-docker-运行)
-      - [使用 Java 命令运行](#使用-java-命令运行)
-      - [安装为 windows 服务](#安装为-windows-服务)
-    - [安装浏览器插件](#安装浏览器插件)
-    - [浏览器插件设置](#浏览器插件设置)
-    - [启用 https](#启用-https)
-    - [登录并使用](#登录并使用)
-  - [请作者喝杯咖啡](#请作者喝杯咖啡)
-  - [感谢 JetBrains 的支持](#感谢-jetbrains-的支持)
-
-Huntly 是一个信息管理工具，它不仅可以自托管，也可以通过客户端在本地运行。简单来说，它包含以下功能：
-
-- RSS 订阅。
-- 网页收藏，自动/手动保存浏览过的网页，随后以保存、稍后读、收藏或存档的方式将其保存。
-- 推文保存，针对推特网站有特殊的处理，会自动保存请求过的推特 timeline，记录是否浏览过，在 huntly 中你甚至可以用更方便的方式重新查看这些推文。
-- 内容全文搜索，可以从标题、内容、类型、收藏方式等维度进行搜索。
-- 连接其他服务，目前支持 GitHub，所以它也是一个 Github stars 管理工具。
-
-未来可能会支持连接到 Pocket、Hypothesis 等服务。
-
-## 系统截图
-
-![intro1](static/images/intro1.png)
-
-![intro2](static/images/intro2.png)
-
-## 运行前提
-
-- Java 11
-
-## 使用
-
-### 运行服务端
-
-可以使用以下方式之一运行服务端。
-
-#### 使用服务端安装包
-
-在 [Releases](https://github.com/lcomplete/huntly/releases) 中下载对应操作系统的安装包，安装后运行即可。
-
-在 Mac 中，如果碰到 `"Huntly.app" is damaged and can't be opened` 的提示消息，请先执行以下命令再进行安装。
-
-```sh
-sudo xattr -r -d com.apple.quarantine /YOUR_PATH/huntly.dmg
-```
-
-#### 使用 docker 运行
-
-```sh
-mkdir huntly && cd huntly
-docker run -itd --name huntly --restart=always -p <host port>:80 -v `pwd`/data:/data lcomplete/huntly
-```
-
-总是拉取 latest 的镜像，如需要升级，可删除本地的 latest，然后再次运行启动命令即可。
-
-#### 使用 Java 命令运行
-
-下载 [Releases](https://github.com/lcomplete/huntly/releases) 中的 jar 包，react 客户端也打包在其中。
-
-下载后在命令行中 cd 到当前目录，通过以下 Java 命令运行：
-
-```sh
-java -Xms128m -Xmx1024m -jar huntly-server.jar
-```
-
-默认以 8080 端口运行，你可以打开 [http://localhost:8080/](http://localhost:8080/) 端口进行访问，若需要使用其他端口，比如 80 端口，可运行以下命令：
-
-
-```sh
-java -Xms128m -Xmx1024m -jar huntly-server.jar --server.port=80
-```
-
-注意，Jar 包名称需要根据下载的包名做适当的修改。
-
-#### 安装为 windows 服务
-
-新建 Huntly 目录，以下操作在该目录中进行。
-
-下载 [Releases](https://github.com/lcomplete/huntly/releases) 中的 jar 包。
-
-下载 [WinSW exe](https://github.com/winsw/winsw/releases), 并将其重命名为 `app.exe` 。
-
-新建 `app.xml`，内容如下：
-
-```xml
-<service>
+<div class="Box-sc-g0xbh4-0 bJMeLZ js-snippet-clipboard-copy-unpositioned" data-hpc="true"><article class="markdown-body entry-content container-lg" itemprop="text"><div class="markdown-heading" dir="auto"><h1 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">亨特利</font></font></h1><a id="user-content-huntly" class="anchor" aria-label="永久链接：亨特利" href="#huntly"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">中文</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">| </font></font><a href="/ExpLangcn/huntly/blob/main/README.en.md"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">English</font></font></a></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">目錄</font></font></h2><a id="user-content-目录" class="anchor" aria-label="固定链接：目录" href="#目录"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<ul dir="auto">
+<li><a href="#huntly"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">亨特利</font></font></a>
+<ul dir="auto">
+<li><a href="#%E7%9B%AE%E5%BD%95"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">目錄</font></font></a></li>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E6%88%AA%E5%9B%BE"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">系统截图</font></font></a></li>
+<li><a href="#%E8%BF%90%E8%A1%8C%E5%89%8D%E6%8F%90"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">運行先陣</font></font></a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用</font></font></a>
+<ul dir="auto">
+<li><a href="#%E8%BF%90%E8%A1%8C%E6%9C%8D%E5%8A%A1%E7%AB%AF"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">运行服务端</font></font></a>
+<ul dir="auto">
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AE%89%E8%A3%85%E5%8C%85"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用条款安装程序</font></font></a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8-docker-%E8%BF%90%E8%A1%8C"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 docker 运行</font></font></a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8-java-%E5%91%BD%E4%BB%A4%E8%BF%90%E8%A1%8C"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 Java 命令运行</font></font></a></li>
+<li><a href="#%E5%AE%89%E8%A3%85%E4%B8%BA-windows-%E6%9C%8D%E5%8A%A1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装为 windows 服务</font></font></a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%89%E8%A3%85%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装浏览器插件</font></font></a></li>
+<li><a href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6%E8%AE%BE%E7%BD%AE"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">浏览器插件设置</font></font></a></li>
+<li><a href="#%E5%90%AF%E7%94%A8-https"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">推薦 https</font></font></a></li>
+<li><a href="#%E7%99%BB%E5%BD%95%E5%B9%B6%E4%BD%BF%E7%94%A8"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登录</font></font></a></li>
+</ul>
+</li>
+<li><a href="#%E8%AF%B7%E4%BD%9C%E8%80%85%E5%96%9D%E6%9D%AF%E5%92%96%E5%95%A1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请作者喝杯咖啡</font></font></a></li>
+<li><a href="#%E6%84%9F%E8%B0%A2-jetbrains-%E7%9A%84%E6%94%AF%E6%8C%81"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">谢谢 JetBrains 的支持</font></font></a></li>
+</ul>
+</li>
+</ul>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Huntly是一个信息管理工具，它不仅可以自托管，也可以通过客户端在本地运行。简单来说，它包含以下功能：</font></font></p>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">RSS 订阅。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网页收藏，自动/手动使用网页，随后以以后读、收藏或存档的方式将其删除。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">推文保存，针对推特网站有特殊的处理，会自动保存请求的推文时间线，记录是否浏览过，在默认情况下你甚至可以用更方便的方式重新查看这些推文。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">内容摘要：正网站建设，针对性、内容、类型、收藏方式等进行网站建设。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">连接其他服务，目前支持 GitHub，因此它也成为 Github stars 管理工具。</font></font></li>
+</ul>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">未来可能会支持连接到 Pocket、Hypothesis 等服务。</font></font></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">系统截图</font></font></h2><a id="user-content-系统截图" class="anchor" aria-label="永久链接：系统截图" href="#系统截图"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="/ExpLangcn/huntly/blob/main/static/images/intro1.png"><img src="/ExpLangcn/huntly/raw/main/static/images/intro1.png" alt="介绍1" style="max-width: 100%;"></a></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="/ExpLangcn/huntly/blob/main/static/images/intro2.png"><img src="/ExpLangcn/huntly/raw/main/static/images/intro2.png" alt="介绍2" style="max-width: 100%;"></a></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">運行先陣</font></font></h2><a id="user-content-运行前提" class="anchor" aria-label="固定链接：运行前提" href="#运行前提"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Java 11</font></font></li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用</font></font></h2><a id="user-content-使用" class="anchor" aria-label="固定链接：使用" href="#使用"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<div class="markdown-heading" dir="auto"><h3 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">运行服务端</font></font></h3><a id="user-content-运行服务端" class="anchor" aria-label="固定链接：运行服务端" href="#运行服务端"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">可以使用以下方式之一运行服务端。</font></font></p>
+<div class="markdown-heading" dir="auto"><h4 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用条款安装程序</font></font></h4><a id="user-content-使用服务端安装包" class="anchor" aria-label="固定链接：使用服务端安装包" href="#使用服务端安装包"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在</font></font><a href="https://github.com/lcomplete/huntly/releases"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Releases</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">中下载对应操作系统的安装包，安装后运行即可。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在Mac中，如果所需</font></font><code>"Huntly.app" is damaged and can't be opened</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的提示消息，请先执行然后再进行安装。</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>sudo xattr -r -d com.apple.quarantine /YOUR_PATH/huntly.dmg</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="sudo xattr -r -d com.apple.quarantine /YOUR_PATH/huntly.dmg" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<div class="markdown-heading" dir="auto"><h4 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 docker 运行</font></font></h4><a id="user-content-使用-docker-运行" class="anchor" aria-label="永久链接：使用 docker 运行" href="#使用-docker-运行"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>mkdir huntly <span class="pl-k">&amp;&amp;</span> <span class="pl-c1">cd</span> huntly
+docker run -itd --name huntly --restart=always -p <span class="pl-k">&lt;</span>host port<span class="pl-k">&gt;</span>:80 -v <span class="pl-s"><span class="pl-pds">`</span>pwd<span class="pl-pds">`</span></span>/data:/data lcomplete/huntly</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="mkdir huntly &amp;&amp; cd huntly
+docker run -itd --name huntly --restart=always -p <host port>:80 -v `pwd`/data:/data lcomplete/huntly" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">总是拉取最新的镜像，如需要升级，可删除本地的最新版本，然后再次运行启动命令即可。</font></font></p>
+<div class="markdown-heading" dir="auto"><h4 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 Java 命令运行</font></font></h4><a id="user-content-使用-java-命令运行" class="anchor" aria-label="永久链接：使用 Java 命令运行" href="#使用-java-命令运行"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下载</font></font><a href="https://github.com/lcomplete/huntly/releases"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Releases</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">中的jar包，react客户端也打包在其中。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下载后在命令行中 cd 到当前目录，通过以下 Java 命令运行：</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>java -Xms128m -Xmx1024m -jar huntly-server.jar</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="java -Xms128m -Xmx1024m -jar huntly-server.jar" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">默认以8080端口运行，你可以打开</font></font><a href="http://localhost:8080/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">http://localhost:8080/</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">端口进行访问，若需要使用其他端口，比如80端口，可运行：</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>java -Xms128m -Xmx1024m -jar huntly-server.jar --server.port=80</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="java -Xms128m -Xmx1024m -jar huntly-server.jar --server.port=80" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注意，Jar 包名称需要根据下载的包名做适当的修改。</font></font></p>
+<div class="markdown-heading" dir="auto"><h4 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装为 windows 服务</font></font></h4><a id="user-content-安装为-windows-服务" class="anchor" aria-label="永久链接：安装为 windows 服务" href="#安装为-windows-服务"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">新建Huntly目录，在该区域中进行以下操作。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下载</font></font><a href="https://github.com/lcomplete/huntly/releases"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Releases</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">中的jar包。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">重新打开</font></font><a href="https://github.com/winsw/winsw/releases"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">WinSW exe</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，并将其重命名为</font></font><code>app.exe</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">新建</font></font><code>app.xml</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，内容如下：</font></font></p>
+<div class="highlight highlight-text-xml notranslate position-relative overflow-auto" dir="auto"><pre>&lt;<span class="pl-ent">service</span>&gt;
+  &lt;<span class="pl-ent">id</span>&gt;huntly&lt;/<span class="pl-ent">id</span>&gt;
+  &lt;<span class="pl-ent">name</span>&gt;huntly&lt;/<span class="pl-ent">name</span>&gt;
+  &lt;<span class="pl-ent">description</span>&gt;huntly&lt;/<span class="pl-ent">description</span>&gt;
+  &lt;<span class="pl-ent">executable</span>&gt;java&lt;/<span class="pl-ent">executable</span>&gt;
+  &lt;<span class="pl-ent">arguments</span>&gt;-Xms128m -Xmx1024m -jar huntly-server.jar --server.port=8123&lt;/<span class="pl-ent">arguments</span>&gt;
+  &lt;<span class="pl-ent">log</span> <span class="pl-e">mode</span>=<span class="pl-s"><span class="pl-pds">"</span>roll<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">log</span>&gt;
+&lt;/<span class="pl-ent">service</span>&gt;</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="<service>
   <id>huntly</id>
   <name>huntly</name>
   <description>huntly</description>
   <executable>java</executable>
   <arguments>-Xms128m -Xmx1024m -jar huntly-server.jar --server.port=8123</arguments>
-  <log mode="roll"></log>
-</service>
-```
-
-打开终端运行命令：
-
-```sh
-.\app.exe install .\app.xml
-```
-
-执行完上面的命令后，Huntly 已经被安装为 windows 服务，并设置为开机自动启动。当前为未启动状态，使用以下命令启动服务：
-
-```sh
-.\app.exe start .\app.xml
-```
-
-启动成功后可访问 [http://localhost:8123](http://localhost:8123) 。
-
-若提示 java 命令无法执行，可将 `executable` 的值改为完整的 `java.exe` 路径。
-
-还支持 uninstall、stop、restart、status、refresh、customize 等命令，具体使用方式请查看 [https://github.com/winsw/winsw](https://github.com/winsw/winsw)。
-
-### 安装浏览器插件
-
-插件已上架 chrome 应用商店，可直接在 [chrome 应用商店 huntly 扩展页面](https://chrome.google.com/webstore/detail/huntly/cphlcmmpbdkadofgcedjgfblmiklbokm) 安装。
-
-如果你想使用最新的功能，可下载 [Releases](https://github.com/lcomplete/huntly/releases) 中的 browser-extension.zip ，将其解压缩。
-
-在浏览器中管理扩展，启用开发者模式，加载已解包的扩展即可。
-
-### 浏览器插件设置
-
-点击插件图标，选择设置 huntly 的服务端地址（huntly 网站首页地址），对于远程地址，在正式使用时，强烈建议使用 https 协议，毕竟浏览记录是相当私密的。若服务端在本机运行，则设置为本地地址即可。
-
-### 启用 https
-
-可以申请免费的 https 证书，并增加以下配置（根据类型进行配置）：
-
-```sh
---server.ssl.key-store-type=JKS --server.ssl.key-store=<file.jks> --server.ssl.key-store-password=<password> --server.ssl.enabled=true
-```
-
-### 登录并使用
-
-首次打开 huntly 网站时，会提示注册一个管理员用户，目前仅支持单用户。
-
-注册后将自动登录到系统中，在登录的情况下，huntly 插件才能将浏览记录发送到服务端。
-
-## 请作者喝杯咖啡
-
-<p align="center">
-	<img height="360" src="static/images/wechat.JPG" />
-	<img height="360" src="static/images/zfb.JPG" />
+  <log mode=&quot;roll&quot;></log>
+</service>" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">打开APP</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>.<span class="pl-cce">\a</span>pp.exe install .<span class="pl-cce">\a</span>pp.xml</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value=".\app.exe install .\app.xml" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">执行完上面的命令后，Huntly将会安装为windows服务，并设置为开机自动启动。当前为未启动状态，使用另一个启动服务：</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>.<span class="pl-cce">\a</span>pp.exe start .<span class="pl-cce">\a</span>pp.xml</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value=".\app.exe start .\app.xml" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">启动成功后可访问</font></font><a href="http://localhost:8123" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">http://localhost:8123</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">若提示 java 命令无法执行，则应选择</font></font><code>executable</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最完整的</font></font><code>java.exe</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">路径。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">还支持卸载、停止、重启、状态、刷新、自定义等命令，具体使用方式请查看</font></font><a href="https://github.com/winsw/winsw"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/winsw/winsw</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<div class="markdown-heading" dir="auto"><h3 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装浏览器插件</font></font></h3><a id="user-content-安装浏览器插件" class="anchor" aria-label="固定链接: 安装浏览器插件" href="#安装浏览器插件"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">插件已架设 chrome 应用商店，可直接在</font></font><a href="https://chrome.google.com/webstore/detail/huntly/cphlcmmpbdkadofgcedjgfblmiklbokm" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">chrome 应用商店 huntly 扩展页面</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果你想使用最新的功能，可下载</font></font><a href="https://github.com/lcomplete/huntly/releases"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Releases</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">中的browser-extension.zip ，将其解压缩。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在浏览器中管理扩展，启用开发者模式，已解包的扩展即可。</font></font></p>
+<div class="markdown-heading" dir="auto"><h3 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">浏览器插件设置</font></font></h3><a id="user-content-浏览器插件设置" class="anchor" aria-label="固定链接：浏览器插件设置" href="#浏览器插件设置"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">点击插件图标，选择设置huntly服务端地址（huntly首页地址），对于远程地址，在正式使用时，安装使用https协议，毕竟浏览记录是相当私密的。服务端在本机运行，则生成本地地址即可。</font></font></p>
+<div class="markdown-heading" dir="auto"><h3 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">推薦 https</font></font></h3><a id="user-content-启用-https" class="anchor" aria-label="永久链接：启用 https" href="#启用-https"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">可以申请免费的 https 证书，并增加以下配置（根据类型进行配置）：</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>--server.ssl.key-store-type=JKS --server.ssl.key-store=<span class="pl-k">&lt;</span>file.jks<span class="pl-k">&gt;</span> --server.ssl.key-store-password=<span class="pl-k">&lt;</span>password<span class="pl-k">&gt;</span> --server.ssl.enabled=true</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="--server.ssl.key-store-type=JKS --server.ssl.key-store=<file.jks> --server.ssl.key-store-password=<password> --server.ssl.enabled=true" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<div class="markdown-heading" dir="auto"><h3 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登录</font></font></h3><a id="user-content-登录并使用" class="anchor" aria-label="固定链接：登录" href="#登录并使用"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">首次打开 huntly 网站时，会提示注册一个管理员用户，目前仅支持单用户。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册后将自动登录到该系统，在登录的情况下，huntly插件才能将浏览记录客户端服务端。</font></font></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请作者喝杯咖啡</font></font></h2><a id="user-content-请作者喝杯咖啡" class="anchor" aria-label="永久链接：请作者喝杯咖啡" href="#请作者喝杯咖啡"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p align="center" dir="auto">
+	<a target="_blank" rel="noopener noreferrer" href="/ExpLangcn/huntly/blob/main/static/images/wechat.JPG"><img height="360" src="/ExpLangcn/huntly/raw/main/static/images/wechat.JPG" style="max-width: 100%;"></a>
+	<a target="_blank" rel="noopener noreferrer" href="/ExpLangcn/huntly/blob/main/static/images/zfb.JPG"><img height="360" src="/ExpLangcn/huntly/raw/main/static/images/zfb.JPG" style="max-width: 100%;"></a>
 </p>
-
-## 感谢 JetBrains 的支持
-
-<a href="https://www.jetbrains.com/?from=huntly">
-  <img src="static/images/jb_beam.png" height="200" />
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">谢谢 JetBrains 的支持</font></font></h2><a id="user-content-感谢-jetbrains-的支持" class="anchor" aria-label="永久链接：感谢 JetBrains 支持" href="#感谢-jetbrains-的支持"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<a href="https://www.jetbrains.com/?from=huntly" rel="nofollow">
+  <img src="/ExpLangcn/huntly/raw/main/static/images/jb_beam.png" height="200" style="max-width: 100%;">
 </a>
+</article></div>
